@@ -39,7 +39,7 @@ class NameLoadTest {
     @Test
     void parseTestWhenEqualsSignIsLast() {
         NameLoad nameLoad = new NameLoad();
-        assertThatThrownBy(() -> nameLoad.parse("Bird="))
+        assertThatThrownBy(() -> nameLoad.parse("Bird ="))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("does not contain a value");
     }
