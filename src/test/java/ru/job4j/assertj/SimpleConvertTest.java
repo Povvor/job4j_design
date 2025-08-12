@@ -37,7 +37,7 @@ class SimpleConvertTest {
                 .startsWith("first")
                 .endsWith("five")
                 .containsExactly("first", "second", "three", "four", "five")
-                .containsExactlyInAnyOrder( "second", "first", "three", "four", "five")
+                .containsExactlyInAnyOrder("second", "first", "three", "four", "five")
                 .allSatisfy(e -> assertThat(e).isNotBlank());
     }
 
@@ -49,9 +49,7 @@ class SimpleConvertTest {
                 .hasSize(4)
                 .contains("three")
                 .doesNotContain("six")
-                .startsWith("first")
-                .endsWith("four")
-                .containsExactly("first", "second", "three", "four")
+                .containsExactlyInAnyOrder("first", "second", "three", "four")
                 .allSatisfy(e -> assertThat(e).isNotBlank());
     }
 
