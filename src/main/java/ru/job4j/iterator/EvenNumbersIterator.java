@@ -30,9 +30,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
             index++;
         }
         return data[index++];
-
-
-
     }
 
 }
