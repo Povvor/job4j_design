@@ -20,7 +20,7 @@ public class MatrixIterator implements Iterator<Integer> {
             row++;
             column = 0;
         }
-        return row < data.length && column < data[row].length;
+        return row < data.length;
     }
 
     @Override
