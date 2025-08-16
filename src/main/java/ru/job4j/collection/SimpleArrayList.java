@@ -1,9 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleArrayList<T> implements SimpleList<T> {
 
@@ -32,23 +29,19 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException();
-        }
-        T oldValue = container[index];
-        container[index] = newValue;
+        int i = Objects.checkIndex(index, size);
+        T oldValue = container[i];
+        container[i] = newValue;
         return oldValue;
 
     }
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        T removed = container[index];
-        int movedNum = size - index - 1;
-        System.arraycopy(container, index + 1, container, index,  movedNum);
+        int i = Objects.checkIndex(index, size);
+        T removed = container[i];
+        int movedNum = size - i - 1;
+        System.arraycopy(container, i + 1, container, i,  movedNum);
         size--;
         modCount++;
         return removed;
@@ -56,10 +49,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException();
-        }
-        return container[index];
+        int i = Objects.checkIndex(index, size);
+        return container[i];
     }
 
     @Override
