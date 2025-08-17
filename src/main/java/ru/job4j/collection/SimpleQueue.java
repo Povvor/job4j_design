@@ -13,13 +13,9 @@ public class SimpleQueue<T> {
         if (size <= 0) {
             throw new NoSuchElementException("Queue is empty");
         }
-        if (size - inputSize > 0) {
-            size--;
-            return output.pop();
-        } else {
-            shift();
-            return poll();
-        }
+        checkStacks();
+        size--;
+        return output.pop();
     }
 
     public void push(T value) {
@@ -28,10 +24,12 @@ public class SimpleQueue<T> {
         inputSize++;
     }
 
-    private void shift() {
-        for (int i = 0; i < inputSize; i++) {
-            output.push(input.pop());
+    private void checkStacks() {
+        if (size - inputSize <= 0) {
+            for (int i = 0; i < inputSize; i++) {
+                output.push(input.pop());
+            }
+            inputSize = 0;
         }
-        inputSize = 0;
     }
 }
