@@ -55,7 +55,7 @@ class SimpleArraySetTest {
     }
 
     @Test
-    void whenContainsElementNotExist(){
+    void whenContainsElementNotExist() {
         SimpleSet<Integer> set = new SimpleArraySet<>();
         set.add(1);
         assertThat(set.contains(2)).isFalse();
