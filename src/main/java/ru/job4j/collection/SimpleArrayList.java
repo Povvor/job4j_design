@@ -29,19 +29,19 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        int i = Objects.checkIndex(index, size);
-        T oldValue = container[i];
-        container[i] = newValue;
+        index = Objects.checkIndex(index, size);
+        T oldValue = container[index];
+        container[index] = newValue;
         return oldValue;
 
     }
 
     @Override
     public T remove(int index) {
-        int i = Objects.checkIndex(index, size);
-        T removed = container[i];
-        int movedNum = size - i - 1;
-        System.arraycopy(container, i + 1, container, i,  movedNum);
+        index = Objects.checkIndex(index, size);
+        T removed = container[index];
+        int movedNum = size - index - 1;
+        System.arraycopy(container, index + 1, container, index,  movedNum);
         size--;
         modCount++;
         return removed;
@@ -49,8 +49,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        int i = Objects.checkIndex(index, size);
-        return container[i];
+        index = Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
