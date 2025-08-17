@@ -6,42 +6,32 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> input = new SimpleStack<>();
     private final SimpleStack<T> output = new SimpleStack<>();
 
-    boolean isInitialOrder;
-    int size;
+    private int size;
+    private int inputSize;
 
     public T poll() {
         if (size <= 0) {
             throw new NoSuchElementException("Queue is empty");
         }
-        if (!isInitialOrder) {
+        if (size - inputSize > 0) {
             size--;
             return output.pop();
         } else {
-            changeOrder();
+            shift();
             return poll();
         }
     }
 
     public void push(T value) {
-        if (isInitialOrder) {
-            input.push(value);
-            size++;
-        } else {
-            changeOrder();
-            push(value);
-        }
+        input.push(value);
+        size++;
+        inputSize++;
     }
 
-    public void changeOrder() {
-        if (isInitialOrder) {
-            for (int i = 0; i < size; i++) {
-                output.push(input.pop());
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
-                input.push(output.pop());
-            }
+    private void shift() {
+        for (int i = 0; i < inputSize; i++) {
+            output.push(input.pop());
         }
-        isInitialOrder = !isInitialOrder;
+        inputSize = 0;
     }
 }
