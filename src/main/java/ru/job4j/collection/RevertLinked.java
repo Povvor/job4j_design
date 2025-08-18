@@ -23,6 +23,7 @@ public class RevertLinked<T> implements Iterable<T> {
         if (head == null || head.next == null) {
             return false;
         }
+
         Node<T> previous = null;
         Node<T> current = head;
         Node<T> next;
