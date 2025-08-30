@@ -21,7 +21,6 @@ public class LogFilter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         for (String string : temp) {
             String[] split = string.split(" ");
             if (split[split.length - 2].equals("404")) {
