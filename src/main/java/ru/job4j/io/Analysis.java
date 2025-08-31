@@ -25,11 +25,12 @@ public class Analysis {
                 timeEnd = split[1];
             } else if (timeEnd != null) {
                 timeEnd = split[1];
-                String entry  = timeStart
-                        + ";"
-                        + timeEnd
-                        + ";";
-                output.add(entry);
+                StringBuilder builder = new StringBuilder();
+                builder.append(timeStart);
+                builder.append(";");
+                builder.append(timeEnd);
+                builder.append(";");
+                output.add(builder.toString());
                 timeStart = null;
                 timeEnd = null;
             }
