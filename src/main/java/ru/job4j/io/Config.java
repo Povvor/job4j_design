@@ -22,27 +22,31 @@ public class Config {
             e.printStackTrace();
         }
         for (String string : list) {
-            string = string.trim();
-            if (string.isEmpty() || string.startsWith("#")) {
-                continue;
-            }
-            int firstEqualSign = string.indexOf('=');
-            if (firstEqualSign == -1) {
-                throw new IllegalArgumentException();
-            }
-            String key = string.substring(0, firstEqualSign).trim();
-            String value = string.substring(firstEqualSign + 1).trim();
-
-            if (key.isEmpty() || value.isEmpty()) {
-                throw new IllegalArgumentException();
-            }
-            values.put(key, value);
+            validateAndPut(string);
         }
 
     }
 
     public String value(String key) {
         return values.get(key);
+    }
+
+    private void validateAndPut(String string) {
+        string = string.trim();
+        if (string.isEmpty() || string.startsWith("#")) {
+            return;
+        }
+        int firstEqualSign = string.indexOf('=');
+        if (firstEqualSign == -1) {
+            throw new IllegalArgumentException();
+        }
+        String key = string.substring(0, firstEqualSign).trim();
+        String value = string.substring(firstEqualSign + 1).trim();
+        if (key.isEmpty() || value.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        values.put(key, value);
+
     }
 
     @Override
