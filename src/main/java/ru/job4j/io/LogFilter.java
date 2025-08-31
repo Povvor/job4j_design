@@ -23,7 +23,7 @@ public class LogFilter {
         }
         for (String string : temp) {
             String[] split = string.split(" ");
-            if (split[split.length - 2].equals("404")) {
+            if ("404".equals(split[split.length - 2])) {
                 result.add(string);
             }
         }
