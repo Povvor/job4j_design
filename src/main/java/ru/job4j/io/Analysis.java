@@ -26,10 +26,7 @@ public class Analysis {
             } else if (timeEnd != null) {
                 timeEnd = split[1];
                 StringBuilder builder = new StringBuilder();
-                builder.append(timeStart);
-                builder.append(";");
-                builder.append(timeEnd);
-                builder.append(";");
+                builder.append(timeStart).append(";").append(timeEnd).append(";");
                 output.add(builder.toString());
                 timeStart = null;
                 timeEnd = null;
