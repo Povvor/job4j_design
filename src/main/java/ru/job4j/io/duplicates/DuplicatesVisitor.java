@@ -6,15 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    private final Map<FileProperty, String> paths = new HashMap<>();
-    private final Set<FileProperty> duplicates = new HashSet<>();
+    private final Map<FileProperty, List<String>> paths = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file,
@@ -25,17 +21,16 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
         FileProperty property = new FileProperty(attributes.size(), file.getFileName().toString());
 
-        if (!paths.containsKey(property)) {
-            paths.put(property, file.toAbsolutePath().toString());
-        } else if (!paths.get(property).isEmpty()) {
-            System.out.println(paths.get(property));
-            paths.put(property, "");
-            System.out.println(file.toAbsolutePath());
-        } else {
-            System.out.println(file.toAbsolutePath());
-        }
-
+        paths.putIfAbsent(property, new ArrayList<>());
+        paths.get(property).add(file.toString());
         return super.visitFile(file, attributes);
+    }
 
+    public void printDublicates() {
+        for (List<String> list : paths.values()) {
+            if (list.size() > 1) {
+                list.forEach(System.out::println);
+            }
+        }
     }
 }
