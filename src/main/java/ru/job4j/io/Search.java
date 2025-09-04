@@ -19,18 +19,21 @@ public class Search {
     }
 
     private static void parseArgs(String[] args) {
+        validateArgs(args);
+        path = Paths.get(args[0]);
+        fileExtension = args[1];
+    }
+
+    private static void validateArgs(String[] args) {
         if (args.length != 2) {
             throw new IllegalArgumentException("Wrong number of arguments. Number must be 2.");
         }
-        path = Paths.get(args[0]);
-        if (Files.notExists(path)) {
+        if (Files.notExists(Paths.get(args[0]))) {
             throw new IllegalArgumentException("Path does not exist.");
         }
         if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("Extension must start with '.'");
         }
-        fileExtension = args[1];
-
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
