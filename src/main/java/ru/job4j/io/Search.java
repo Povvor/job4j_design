@@ -18,6 +18,10 @@ public class Search {
         search(start, path -> path.toFile().getName().endsWith(fileExtension)).forEach(System.out::println);
     }
 
+    public static List<Path> getPathsExcludeExtension(Path file, String fileExtension) throws IOException {
+        return (search(file, path -> path.toFile().getName().endsWith(fileExtension)).stream().toList());
+    }
+
     private static void parseArgs(String[] args) {
         validateArgs(args);
         path = Paths.get(args[0]);
