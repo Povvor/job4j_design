@@ -9,7 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    private HashMap<String,String> values = new HashMap<>();
+    private final HashMap<String, String> values = new HashMap<>();
     private Path directory;
     private String exclude;
     private File output;
@@ -87,7 +87,6 @@ public class Zip {
            }
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
