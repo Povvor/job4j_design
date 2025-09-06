@@ -14,6 +14,10 @@ public class ArgsName {
         return values.get(key);
     }
 
+    public Map<String, String> getValues() {
+        return values;
+    }
+
     private void parse(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments not passed to program");
@@ -31,7 +35,7 @@ public class ArgsName {
 
     private void validateAndPut(String string) {
         if (!string.startsWith("-")) {
-            throw new IllegalArgumentException("Error: This argument 'request=?msg=Exit=' does not start with a '-' character");
+            throw new IllegalArgumentException("Error: This argument '" + string + "' does not start with a '-' character");
         }
         int firstEqualSign = string.indexOf('=');
         if (firstEqualSign == -1) {
