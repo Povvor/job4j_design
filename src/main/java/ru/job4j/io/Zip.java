@@ -5,11 +5,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    private final HashMap<String, String> values = new HashMap<>();
+    private final Map<String, String> values = new HashMap<>();
     private Path directory;
     private String exclude;
     private File output;
