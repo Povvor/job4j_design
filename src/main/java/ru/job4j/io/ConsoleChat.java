@@ -26,7 +26,7 @@ public class ConsoleChat {
         Scanner scanner = new Scanner(System.in);
         String lastMessage = "";
 
-        while (!lastMessage.equals(OUT)) {
+        while (!OUT.equals(lastMessage)) {
             String message = scanner.nextLine();
             log.add(message);
             switch (message) {
