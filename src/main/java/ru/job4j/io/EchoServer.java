@@ -38,12 +38,11 @@ public class EchoServer {
                                         case "Hello":
                                             output.write("Hello".getBytes());
                                             break;
-                                        case "Bye":
-                                            output.write("Bye".getBytes());
+                                        case "Exit":
                                             server.close();
                                             break;
                                         default:
-                                            output.write("Wrong message".getBytes());
+                                            output.write("What".getBytes());
                                     }
                                 }
                             }
