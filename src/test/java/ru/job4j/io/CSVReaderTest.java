@@ -36,8 +36,7 @@ class CSVReaderTest {
     }
 
     @Test
-    void whenFilterTh
-    reeColumns(@TempDir Path folder) throws Exception {
+    void whenFilterThreeColumns(@TempDir Path folder) throws Exception {
         String data = String.join(
                 System.lineSeparator(),
                 "name,age,last_name,education",
