@@ -28,28 +28,23 @@ public class EchoServer {
                      BufferedReader input = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-
-                    for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
-                        if (string.startsWith("GET")) {
-                            Map<String, String> values = parseArgs(string);
-                            for (Map.Entry<String, String> entry : values.entrySet()) {
-                                if (entry.getKey().startsWith("msg")) {
-                                    switch (entry.getValue()) {
-                                        case "Hello":
-                                            output.write("Hello".getBytes());
-                                            break;
-                                        case "Exit":
-                                            server.close();
-                                            break;
-                                        default:
-                                            output.write("What".getBytes());
-                                    }
-                                }
-                            }
+                    String string = input.readLine();
+                    Map<String, String> values = parseArgs(string);
+                    if (values.containsKey("msg")) {
+                        switch (values.get("msg")) {
+                            case "Hello":
+                                output.write("Hello".getBytes());
+                                break;
+                            case "Bye":
+                                output.write("Bye".getBytes());
+                                server.close();
+                                break;
+                            default:
+                                output.write("Wrong message".getBytes());
                         }
-                        System.out.println(string);
+                        output.flush();
+
                     }
-                    output.flush();
                 }
             }
         }
