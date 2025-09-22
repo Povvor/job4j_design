@@ -35,4 +35,24 @@ public class Hero {
                 + ", perks=" + Arrays.toString(perks)
                 + '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isMainHero() {
+        return mainHero;
+    }
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public String[] getPerks() {
+        return perks;
+    }
 }
