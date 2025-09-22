@@ -1,13 +1,21 @@
 package ru.job4j.serialization.json;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.Arrays;
 
+@XmlRootElement(name = "hero")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Hero {
-    private final String name;
-    private final boolean mainHero;
-    private final int lvl;
-    private final Weapon weapon;
-    private final String[] perks;
+    private String name;
+    private boolean mainHero;
+    private int lvl;
+    private Weapon weapon;
+    private String[] perks;
+
+    public Hero() { }
 
     public Hero(String name, boolean mainHero, int lvl, Weapon weapon, String[] perks) {
         this.name = name;

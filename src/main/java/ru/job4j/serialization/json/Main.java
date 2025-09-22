@@ -1,32 +1,33 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+
+import java.io.StringReader;
+import java.io.StringWriter;
 
 public class Main {
-    public static void main(String[] args) {
-        final Hero person = new Hero("Cornitor", false, 30, new Weapon("Sword", 10),
+    public static void main(String[] args) throws Exception {
+        Hero hero = new Hero("Cornitor", false, 30, new Weapon("Sword", 10),
                 new String[] {"Stone skin", "Shield"});
 
-        /* Преобразуем объект person в json-строку. */
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(person));
+        JAXBContext context = JAXBContext.newInstance(Hero.class);
 
-        /* Создаём новую json-строку с модифицированными данными*/
-        final String personJson =
-                "{"
-                        + "\"name\":\"Cornitor\","
-                        + "\"mainHero\":false,"
-                        + "\"lvl\":8,"
-                        + "\"Weapon\":"
-                        + "{"
-                        + "\"Sword\":\"10\""
-                        + "},"
-                        + "\"perks\":"
-                        + "[\"Stone Skin\",\"Shield\"]"
-                        + "}";
-        /* Превращаем json-строку обратно в объект */
-        final Hero personMod = gson.fromJson(personJson, Hero.class);
-        System.out.println(personMod);
+        Marshaller marshaller = context.createMarshaller();
+
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml;
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(hero, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+        }
+
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            Hero result = (Hero) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
     }
 }
